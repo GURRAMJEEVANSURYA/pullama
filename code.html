@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Sister!</title>
+  <link rel="stylesheet" href="code.css" />
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="birthday-cake">🎂</div>
+      <h1 class="birthday-title">
+        <span class="title-line">Happy</span>
+        <span class="title-line">Birthday</span>
+        <span class="sister-name">Sister!</span>
+      </h1>
+      <div class="floating-elements">
+        <span class="floating-emoji">🎈</span>
+        <span class="floating-emoji">🎁</span>
+        <span class="floating-emoji">✨</span>
+        <span class="floating-emoji">🎉</span>
+        <span class="floating-emoji">💖</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Message Section -->
+  <section class="message-section">
+    <div class="container">
+      <h2 class="section-title">A Special Message For You</h2>
+      <div class="message-card">
+        <p class="personal-message">
+          Dear Sister, on this special day, I want you to know how much you mean to me. 
+          You're not just my sister, you're my best friend, my confidant, and my biggest supporter. 
+          Thank you for all the laughter, the memories, and the unconditional love you've given me.
+        </p>
+        <p class="personal-message">
+          May your birthday be filled with joy, love, and all the wonderful things you deserve. 
+          Here's to another amazing year of your beautiful life! 🎉
+        </p>
+        <div class="signature">
+          <p>With all my love,</p>
+          <p class="signature-name">Your Loving Sibling</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Gallery Section -->
+  <section class="gallery-section">
+    <div class="container">
+      <h2 class="section-title">Our Beautiful Memories</h2>
+      <div class="gallery-container">
+        <button class="gallery-nav prev" onclick="prevImage()">&#8249;</button>
+        <div class="image-container">
+          <img id="gallery-image" src="assets/birthday-image-1.jpg" alt="Birthday memory 1" class="gallery-image" />
+          <div id="image-placeholder" class="image-placeholder" style="display:none;">
+            <span>📸</span>
+            <p>Loading image...</p>
+            <p>Please check if the image exists in the assets folder</p>
+          </div>
+        </div>
+        <button class="gallery-nav next" onclick="nextImage()">&#8250;</button>
+      </div>
+      <div class="image-indicators" id="image-indicators"></div>
+    </div>
+  </section>
+
+  <!-- Birthday Wishes Section -->
+  <section class="wishes-section">
+    <div class="container">
+      <h2 class="section-title">Birthday Wishes</h2>
+      <div class="wishes-grid">
+        <div class="wish-card sparkle-card">
+          <div class="card-glow"></div>
+          <span class="wish-emoji">🌟</span>
+          <h3 class="wish-title">Shine Bright</h3>
+          <p>May your day be as bright and beautiful as you are!</p>
+          <div class="sparkles">
+            <span>✨</span><span>✨</span><span>✨</span>
+          </div>
+        </div>
+        <div class="wish-card love-card">
+          <div class="card-glow"></div>
+          <span class="wish-emoji">💝</span>
+          <h3 class="wish-title">Endless Love</h3>
+          <p>Wishing you love, laughter, and endless happiness!</p>
+          <div class="hearts">
+            <span>💖</span><span>💕</span><span>💗</span>
+          </div>
+        </div>
+        <div class="wish-card celebration-card">
+          <div class="card-glow"></div>
+          <span class="wish-emoji">🎊</span>
+          <h3 class="wish-title">Celebrate You</h3>
+          <p>Here's to celebrating the amazing person you are!</p>
+          <div class="confetti">
+            <span>🎉</span><span>🎈</span><span>🎊</span>
+          </div>
+        </div>
+        <div class="wish-card dream-card">
+          <div class="card-glow"></div>
+          <span class="wish-emoji">🌈</span>
+          <h3 class="wish-title">Dream Big</h3>
+          <p>May all your dreams come true this year!</p>
+          <div class="stars">
+            <span>⭐</span><span>⭐</span><span>⭐</span>
+          </div>
+        </div>
+        <div class="wish-card magic-card">
+          <div class="card-glow"></div>
+          <span class="wish-emoji">✨</span>
+          <h3 class="wish-title">Pure Magic</h3>
+          <p>Your birthday is going to be absolutely magical!</p>
+          <div class="magic-sparkles">
+            <span>🔮</span><span>✨</span><span>🌟</span>
+          </div>
+        </div>
+        <div class="wish-card joy-card">
+          <div class="card-glow"></div>
+          <span class="wish-emoji">🎂</span>
+          <h3 class="wish-title">Sweet Joy</h3>
+          <p>May your birthday be filled with sweet moments and pure joy!</p>
+          <div class="cake-elements">
+            <span>🍰</span><span>🎁</span><span>🎈</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Made with 💖 for the most amazing sister in the world!</p>
+      <div class="footer-elements">
+        <span>🎂</span>
+        <span>🎈</span>
+        <span>🎁</span>
+        <span>✨</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Audio Player (autoplay, loop, hidden controls) -->
+  <audio id="birthday-audio" src="assets/birthday-music.mp3" autoplay loop></audio>
+
+  <script>
+    // Gallery logic - auto sliding carousel
+    const images = [
+      'assets/birthday-image-1.jpg',
+      'assets/birthday-image-2.jpg',
+      'assets/birthday-image-3.jpg',
+      'assets/birthday-image-4.jpg',
+      'assets/birthday-image-5.jpg',
+      'assets/birthday-image-6.jpg'
+    ];
+    let currentImageIndex = 0;
+    const galleryImage = document.getElementById('gallery-image');
+    const imagePlaceholder = document.getElementById('image-placeholder');
+    const indicators = document.getElementById('image-indicators');
+
+    function updateGallery() {
+      galleryImage.style.display = 'none';
+      imagePlaceholder.style.display = 'block';
+      galleryImage.src = images[currentImageIndex];
+      galleryImage.onload = function() {
+        galleryImage.style.display = 'block';
+        imagePlaceholder.style.display = 'none';
+      };
+      updateIndicators();
+    }
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      updateGallery();
+    }
+    function setCurrentImageIndex(index) {
+      currentImageIndex = index;
+      updateGallery();
+    }
+    function updateIndicators() {
+      indicators.innerHTML = '';
+      images.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'indicator' + (idx === currentImageIndex ? ' active' : '');
+        btn.onclick = () => setCurrentImageIndex(idx);
+        indicators.appendChild(btn);
+      });
+    }
+    // Initial gallery setup
+    updateGallery();
+    // Auto-slide every 3 seconds
+    setInterval(nextImage, 3000);
+
+    // Audio autoplay for mobile (user gesture required)
+    document.body.addEventListener('click', function playAudioOnce() {
+      const audio = document.getElementById('birthday-audio');
+      if (audio.paused) audio.play();
+      document.body.removeEventListener('click', playAudioOnce);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="form-container sign-in-container">
+      <h2>Welcome Sister!</h2>
+      <p>Enter your details too open these website</p>
+    </div>
+    <div class="form-container sign-up-container">
+      <input type="text" id="username" placeholder="Name" />
+      <input type="password" id="password" placeholder="Password" />
+      <button class="sign-up-btn" id="loginBtn">SIGN UP</button>
+      <div id="message"></div>
+    </div>
+  </div>
+</body>
+<script>
+document.getElementById('loginBtn').addEventListener('click', function() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const messageDiv = document.getElementById('message');
+  if (username === 'pullama' && password === 'joy') {
+    messageDiv.style.color = 'green';
+    messageDiv.textContent = 'Login successful!';
+    setTimeout(function() {
+      window.location.href = 'code.html';
+    }, 1000);
+  } else {
+    messageDiv.style.color = 'red';
+    messageDiv.textContent = 'Invalid username or password.';
+  }
+});
+</script>
+</html>
