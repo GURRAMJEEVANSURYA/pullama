@@ -131,6 +131,77 @@
     </div>
   </section>
 
+  <!-- Animated Birthday Cake Section -->
+  <section class="cake-section">
+    <div class="container">
+      <h2 class="section-title">Make a Wish & Blow!</h2>
+      <div class="cake-container">
+        <div class="birthday-cake-animated">
+          <!-- Cake Base -->
+          <div class="cake-base">
+            <div class="cake-layer cake-layer-1"></div>
+            <div class="cake-layer cake-layer-2"></div>
+            <div class="cake-layer cake-layer-3"></div>
+          </div>
+          
+          <!-- 20 Candles -->
+          <div class="candles-container">
+            <div class="candle" data-candle="1"><div class="candle-body"></div><div class="flame flame-1"></div></div>
+            <div class="candle" data-candle="2"><div class="candle-body"></div><div class="flame flame-2"></div></div>
+            <div class="candle" data-candle="3"><div class="candle-body"></div><div class="flame flame-3"></div></div>
+            <div class="candle" data-candle="4"><div class="candle-body"></div><div class="flame flame-4"></div></div>
+            <div class="candle" data-candle="5"><div class="candle-body"></div><div class="flame flame-5"></div></div>
+            <div class="candle" data-candle="6"><div class="candle-body"></div><div class="flame flame-6"></div></div>
+            <div class="candle" data-candle="7"><div class="candle-body"></div><div class="flame flame-7"></div></div>
+            <div class="candle" data-candle="8"><div class="candle-body"></div><div class="flame flame-8"></div></div>
+            <div class="candle" data-candle="9"><div class="candle-body"></div><div class="flame flame-9"></div></div>
+            <div class="candle" data-candle="10"><div class="candle-body"></div><div class="flame flame-10"></div></div>
+            <div class="candle" data-candle="11"><div class="candle-body"></div><div class="flame flame-11"></div></div>
+            <div class="candle" data-candle="12"><div class="candle-body"></div><div class="flame flame-12"></div></div>
+            <div class="candle" data-candle="13"><div class="candle-body"></div><div class="flame flame-13"></div></div>
+            <div class="candle" data-candle="14"><div class="candle-body"></div><div class="flame flame-14"></div></div>
+            <div class="candle" data-candle="15"><div class="candle-body"></div><div class="flame flame-15"></div></div>
+            <div class="candle" data-candle="16"><div class="candle-body"></div><div class="flame flame-16"></div></div>
+            <div class="candle" data-candle="17"><div class="candle-body"></div><div class="flame flame-17"></div></div>
+            <div class="candle" data-candle="18"><div class="candle-body"></div><div class="flame flame-18"></div></div>
+            <div class="candle" data-candle="19"><div class="candle-body"></div><div class="flame flame-19"></div></div>
+            <div class="candle" data-candle="20"><div class="candle-body"></div><div class="flame flame-20"></div></div>
+          </div>
+          
+          <!-- Cake Decorations -->
+          <div class="cake-decorations">
+            <div class="sprinkle sprinkle-1"></div>
+            <div class="sprinkle sprinkle-2"></div>
+            <div class="sprinkle sprinkle-3"></div>
+            <div class="sprinkle sprinkle-4"></div>
+            <div class="sprinkle sprinkle-5"></div>
+            <div class="sprinkle sprinkle-6"></div>
+            <div class="sprinkle sprinkle-7"></div>
+            <div class="sprinkle sprinkle-8"></div>
+          </div>
+        </div>
+        
+        <!-- Blow Button -->
+        <button class="blow-button" onclick="blowCandles()">
+          <span class="blow-icon">💨</span>
+          <span class="blow-text">Blow the Candles!</span>
+        </button>
+        
+        <!-- Knife (hidden initially) -->
+        <div class="cake-knife" id="cake-knife">
+          <div class="knife-handle"></div>
+          <div class="knife-blade"></div>
+        </div>
+        
+        <!-- Success Message -->
+        <div class="success-message" id="success-message">
+          <h3>🎉 Happy Birthday! 🎉</h3>
+          <p>Your wish will come true!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -200,6 +271,149 @@
       if (audio.paused) audio.play();
       document.body.removeEventListener('click', playAudioOnce);
     });
+
+    // Birthday Cake Animation Functions
+    let candlesBlown = 0;
+    const totalCandles = 20;
+    let cakeBlown = false;
+
+    function blowCandles() {
+      if (cakeBlown) return;
+      
+      const blowButton = document.querySelector('.blow-button');
+      const cakeKnife = document.getElementById('cake-knife');
+      const successMessage = document.getElementById('success-message');
+      
+      // Disable button and change appearance
+      blowButton.classList.add('blown');
+      blowButton.innerHTML = '<span>🎉</span><span>All Candles Blown!</span>';
+      
+      // Blow out all candles with staggered animation
+      const flames = document.querySelectorAll('.flame');
+      flames.forEach((flame, index) => {
+        setTimeout(() => {
+          flame.classList.add('blown-out');
+          candlesBlown++;
+          
+          // Add smoke effect
+          createSmokeEffect(flame);
+          
+          // Check if all candles are blown
+          if (candlesBlown === totalCandles) {
+            setTimeout(() => {
+              showKnife();
+            }, 1000);
+          }
+        }, index * 100); // Stagger the blow out effect
+      });
+      
+      cakeBlown = true;
+    }
+
+    function createSmokeEffect(flame) {
+      const smoke = document.createElement('div');
+      smoke.className = 'smoke-particle';
+      smoke.style.cssText = `
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: rgba(128, 128, 128, 0.6);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 5;
+        animation: smokeRise 2s ease-out forwards;
+      `;
+      
+      flame.parentElement.appendChild(smoke);
+      
+      // Remove smoke element after animation
+      setTimeout(() => {
+        if (smoke.parentElement) {
+          smoke.parentElement.removeChild(smoke);
+        }
+      }, 2000);
+    }
+
+    function showKnife() {
+      const cakeKnife = document.getElementById('cake-knife');
+      const successMessage = document.getElementById('success-message');
+      
+      // Show knife
+      cakeKnife.classList.add('show');
+      
+      // After knife appears, show success message
+      setTimeout(() => {
+        successMessage.classList.add('show');
+        
+        // Add confetti effect
+        createConfetti();
+      }, 1500);
+    }
+
+    function createConfetti() {
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.style.cssText = `
+            position: fixed;
+            top: -10px;
+            left: ${Math.random() * 100}vw;
+            width: 10px;
+            height: 10px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            border-radius: 2px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: confettiFall 3s linear forwards;
+          `;
+          
+          document.body.appendChild(confetti);
+          
+          // Remove confetti after animation
+          setTimeout(() => {
+            if (confetti.parentElement) {
+              confetti.parentElement.removeChild(confetti);
+            }
+          }, 3000);
+        }, i * 50);
+      }
+    }
+
+    // Add CSS animations for smoke and confetti
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes smokeRise {
+        0% {
+          transform: translateX(-50%) translateY(0) scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: translateX(-50%) translateY(-30px) scale(1.5);
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateX(-50%) translateY(-60px) scale(2);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes confettiFall {
+        0% {
+          transform: translateY(-10px) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
